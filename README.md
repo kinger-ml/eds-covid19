@@ -1,4 +1,4 @@
-ads_covid19
+eds_covid19
 ==============================
 
 Data Science project
