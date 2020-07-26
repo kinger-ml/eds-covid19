@@ -17,6 +17,7 @@ df_input_large=pd.read_csv('../../data/processed/COVID_final_set.csv',sep=';')
 fig = go.Figure()
 
 app = dash.Dash()
+server = app.server
 app.layout = html.Div([
 
     dcc.Markdown('''
