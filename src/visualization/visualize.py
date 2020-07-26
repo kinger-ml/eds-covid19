@@ -11,13 +11,12 @@ import plotly.graph_objects as go
 
 import os
 print(os.getcwd())
-df_input_large=pd.read_csv('../../data/processed/COVID_final_set.csv',sep=';')
+df_input_large=pd.read_csv('data/processed/COVID_final_set.csv',sep=';')
 
 
 fig = go.Figure()
 
 app = dash.Dash()
-server = app.server
 app.layout = html.Div([
 
     dcc.Markdown('''
@@ -116,7 +115,8 @@ def update_figure(country_list,show_doubling):
                 yaxis=my_yaxis
         )
     }
+def visualize():
+    app.run_server(debug=True, use_reloader=False)
 
 if __name__ == '__main__':
-
     app.run_server(debug=True, use_reloader=False)
