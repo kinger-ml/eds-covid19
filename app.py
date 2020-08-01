@@ -16,7 +16,7 @@ from dash.dependencies import Input, Output, State
 
 import plotly.graph_objects as go
 
-
+"""
 from src.data.get_data import get_johns_hopkins
 from src.data.process_JH_data import store_relational_JH_data
 from src.features.build_features import generate_features
@@ -30,7 +30,7 @@ print('Processed data stored')
 print('Generate features')
 generate_features()
 print('Features stored')
-
+"""
 import os
 print(os.getcwd())
 df_input_large=pd.read_csv('data/processed/COVID_final_set.csv',sep=';')
