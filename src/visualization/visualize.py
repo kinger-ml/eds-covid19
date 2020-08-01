@@ -5,13 +5,14 @@ import dash
 dash.__version__
 import dash_core_components as dcc
 import dash_html_components as html
-from dash.dependencies import Input, Output,State
+from dash.dependencies import Input, Output
 
 import plotly.graph_objects as go
 
 import os
 print(os.getcwd())
-df_input_large=pd.read_csv('data/processed/COVID_final_set.csv',sep=';')
+
+df_input_large=pd.read_csv('../../data/processed/COVID_final_set.csv',sep=';')
 
 
 fig = go.Figure()

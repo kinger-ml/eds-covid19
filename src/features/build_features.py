@@ -144,7 +144,19 @@ def calc_doubling_rate(df_input,filter_on='confirmed'):
 
     return df_output
 
-
+def generate_features():
+    pd_JH_data=pd.read_csv('data/processed/COVID_relational_confirmed.csv',sep=';',parse_dates=[0])
+    pd_JH_data=pd_JH_data.sort_values('date',ascending=True).copy()
+    print('---Calc Filtered Data')
+    pd_result_larg=calc_filtered_data(pd_JH_data)
+    print('---Calc Doubling Data')
+    pd_result_larg=calc_doubling_rate(pd_result_larg)
+    print('---Calc Confirmed Filter')
+    pd_result_larg=calc_doubling_rate(pd_result_larg,'confirmed_filtered')
+    mask=pd_result_larg['confirmed']>100
+    pd_result_larg['confirmed_filtered_DR']=pd_result_larg['confirmed_filtered_DR'].where(mask, other=np.NaN)
+    pd_result_larg.to_csv('data/processed/COVID_final_set.csv',sep=';',index=False)
+    
 if __name__ == '__main__':
     test_data_reg=np.array([2,4,6])
     result=get_doubling_time_via_regression(test_data_reg)
