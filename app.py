@@ -13,9 +13,9 @@ import dash_core_components as dcc
 
 from dash.dependencies import Input, Output
 from src.visualization.html_components import tab1, tab2
-from src.data.get_data import get_johns_hopkins
-from src.data.process_JH_data import store_relational_JH_data
-from src.features.build_features import generate_features
+#from src.data.get_data import get_johns_hopkins
+#from src.data.process_JH_data import store_relational_JH_data
+#from src.features.build_features import generate_features
 from src.models.sir_model import SIR_modelling
 
 df_input_large=pd.read_csv('data/processed/COVID_final_set.csv',sep=';')
