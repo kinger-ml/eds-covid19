@@ -8,18 +8,18 @@ import dash_html_components as html
 import dash_core_components as dcc
 def tab1(countries):
     return html.Div([
-            html.H1('Country', style={'width': '12%','display': 'inline-block'}),          
+            html.H2('Country', style={'width': '13%','display': 'inline-block'}),          
             dcc.Dropdown(
                 id='country_list',
                 options=countries,
                 value=['US', 'Germany','India'], # which are pre-selected
                 multi=True,
-                style={'width': '80%','display': 'inline-block', 'height': '40px'}
+                style={'width': '60%','display': 'inline-block', 'height': '40px'}
             ),
             dcc.Markdown('''
             
             '''),
-            html.H1('Visualization', style={'width': '12%','display': 'inline-block'}),
+            html.H2('Visualization', style={'width': '13%','display': 'inline-block'}),
             dcc.Dropdown(
             id='selected_viz',
             options=[
@@ -30,7 +30,7 @@ def tab1(countries):
             ],
             value='confirmed',
             multi=False,
-            style={'width': '60%','display': 'inline-block', 'height': '40px'}
+            style={'width': '40%','display': 'inline-block', 'height': '40px'}
             ),
             dcc.Graph(id='covid_stats_plot')
 ],style={'fontWeight': 'bold', 'font-size': '16px', 'font-family': 'cursive'})

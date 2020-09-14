@@ -13,15 +13,17 @@ import dash_core_components as dcc
 
 from dash.dependencies import Input, Output
 from src.visualization.html_components import tab1, tab2
-#from src.data.get_data import get_johns_hopkins
-#from src.data.process_JH_data import store_relational_JH_data
-#from src.features.build_features import generate_features
+from src.data.get_data import get_johns_hopkins
+from src.data.process_JH_data import store_relational_JH_data
+from src.features.build_features import generate_features
 from src.models.sir_model import SIR_modelling
 
 df_input_large=pd.read_csv('data/processed/COVID_final_set.csv',sep=';')
 countries=[ {'label': each,'value':each} for each in df_input_large['country'].unique()]
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
+
+
 tab_style = {
     'padding': '2px',
     'fontWeight': 'bold',
@@ -34,6 +36,8 @@ tab_selected_style = {
     'font-family': 'cursive',
     'backgroundColor': 'blanchedalmond',
 }
+
+
 app.layout = html.Div([
     dcc.Tabs(id="tabs_main", value='tab_stats', children=[
         dcc.Tab(label='Covid-19 Statistics', value='tab_stats', style=tab_style, selected_style=tab_selected_style),
@@ -42,6 +46,7 @@ app.layout = html.Div([
     html.Div(id='tabs_content')
 ])
 
+#Callback for tab selection
 @app.callback(Output('tabs_content', 'children'),
               [Input('tabs_main', 'value')])
 def render_content(tab):
@@ -50,11 +55,11 @@ def render_content(tab):
     elif tab == 'tab_prediction':
         return tab2(countries)
 
+#Callback for Tab1 user interactions
 @app.callback(
     Output('covid_stats_plot', 'figure'),
     [Input('country_list', 'value'),
-    Input('selected_viz', 'value')])
-    
+    Input('selected_viz', 'value')])  
 def update_figure(country_list,viz):
     if 'DR' in viz:
         my_yaxis={'type':"log",
@@ -101,6 +106,7 @@ def update_figure(country_list,viz):
         )
     }
 
+#Callback for tab2 user interactions
 @app.callback(
     Output('SIR_graph', 'figure'),
     [Input('country_value', 'value')])
@@ -145,9 +151,9 @@ def update_SIR_figure(country):
                 yaxis={'title': "Infected population"}
         )
     }
-   
+
+#Inside main, call the data retreivak routines   
 if __name__ == '__main__':
-    """ 
     print('-----Retrieve John Hopkins Data--------')
     get_johns_hopkins()
     print('***** Data Retrieved **********')
@@ -157,6 +163,4 @@ if __name__ == '__main__':
     print('Generate features')
     generate_features()
     print('Features stored')
-    """
-    print('Inside Main')
     app.run_server(debug=False)
